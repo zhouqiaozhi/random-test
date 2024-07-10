@@ -23,6 +23,11 @@ public class TestController {
     public String testPost(@RequestBody Map<String, String> body) {
         return "test";
     }
+    @PostMapping("/empty")
+    @MethodDesc(v = "test-post-empty-body")
+    public String testPostEmptyBody() {
+        return "test";
+    }
     @PutMapping
     @MethodDesc(v = "test-put")
     public String testPut() {

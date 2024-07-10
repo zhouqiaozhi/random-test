@@ -8,7 +8,7 @@ import com.zhou.aop.annotation.EnableLogDesc;
 //import com.zhou.aop.basic.LoggerBasic;
 
 @SpringBootApplication
-@EnableLogDesc
+@EnableLogDesc // you can disable log with comment this
 public class ImportTestApplication {
 //	extends LoggerBasic implements CommandLineRunner {
 	

@@ -58,9 +58,10 @@ public class ControllerAspect extends LoggerBasic {
 
     // OK(has annotation, not in [GET, POST]) curl --location --request PUT 'http://localhost:8080/test'
     @Around("desc() && !pointcutGet() && !pointcutPost()")
-    private Object aroundOther(ProceedingJoinPoint point) {
+    private Object aroundOther(ProceedingJoinPoint point) throws JsonProcessingException {
         log.info("This is {}", request.getMethod());
         return next(point);
+//    	return requestResponseLog(point, (p) -> null);
     }
 
     private Object requestResponseLog(ProceedingJoinPoint point, Function<ProceedingJoinPoint, Map.Entry<String, Object>> f) throws JsonProcessingException {
@@ -70,7 +71,13 @@ public class ControllerAspect extends LoggerBasic {
         var annotation = method.getAnnotation(MethodDesc.class);
         var methodName = Strings.isEmpty(annotation.v()) ? method.getName() : annotation.v();
         var requestInfo = f.apply(point);
-        log.info("Start call uri:{} name:{} {}: {}",
+        String requestLogText = "Start call uri:{} name:{} {}: {}";
+        if(requestInfo == null) {
+        	log.warn("requestInfo not found, please check a method");
+        	requestLogText = requestLogText.substring(0, requestLogText.length() - 6);
+        	requestInfo = new AbstractMap.SimpleEntry<>(null, null);
+        }
+        log.info(requestLogText,
                 request.getRequestURI(),
                 methodName,
                 requestInfo.getKey(),
