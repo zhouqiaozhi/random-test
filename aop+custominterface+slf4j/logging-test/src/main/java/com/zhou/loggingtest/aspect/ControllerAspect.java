@@ -12,7 +12,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -75,7 +74,6 @@ public class ControllerAspect extends LoggerBasic {
     @Around("desc() && pointcutPost()")
     private Object aroundPost(ProceedingJoinPoint point) throws IOException {
         long start = System.currentTimeMillis();
-        var request = new ContentCachingRequestWrapper(this.request);
         var signature = (MethodSignature) point.getSignature();
         var method = signature.getMethod();
         var annotation = method.getAnnotation(MethodDesc.class);
