@@ -99,7 +99,7 @@ public class ControllerAspect extends LoggerBasic {
     }
 
     // OK(has annotation, not in [GET, POST]) curl --location --request PUT 'http://localhost:8080/test'
-    @Around("desc() && !pointcutPost() && !pointcutPost()")
+    @Around("desc() && !pointcutGet() && !pointcutPost()")
     private Object aroundOther(ProceedingJoinPoint point) {
         log.info("This is {}", request.getMethod());
         Object result = null;
