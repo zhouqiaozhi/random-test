@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: batch
+  jpa:
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/batchdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers: ${kafka.id}:9092
+    template:
+      default-topic: test-topic
+    consumer:
+      group-id: test-service
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      max-poll-records: 50
+kafka:
+  ip: localhost
+logging:
+  level:
+    com.zhou: debug
+    org.hibernate: debug
