@@ -1,0 +1,9 @@
+com:
+  zhou:
+    mysql:
+      ip: localhost
+    kafka:
+      ip: localhost
+      port: 9092
+    file:
+      path: D:/code/files

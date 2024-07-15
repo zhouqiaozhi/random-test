@@ -1,0 +1,9 @@
+com:
+  zhou:
+    mysql:
+      ip: mysql-batch
+    kafka:
+      ip: kafka
+      port: 19092
+    file:
+      path: /root/files

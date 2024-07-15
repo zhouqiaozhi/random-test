@@ -1,0 +1,7 @@
+CREATE TABLE `BATCH_TEST` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `value` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+INSERT INTO BATCH_TEST (value) VALUES ('0');

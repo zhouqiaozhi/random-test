@@ -1,15 +1,18 @@
 spring:
   application:
     name: batch
+  profiles:
+    active:
+    - local
   jpa:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/batchdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://${com.zhou.mysql.ip}:3306/batchdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
   kafka:
-    bootstrap-servers: ${kafka.id}:9092
+    bootstrap-servers: ${com.zhou.kafka.ip}:${com.zhou.kafka.port}
     template:
       default-topic: test-topic
     consumer:
@@ -17,8 +20,6 @@ spring:
       enable-auto-commit: false
       auto-offset-reset: earliest
       max-poll-records: 50
-kafka:
-  ip: localhost
 logging:
   level:
     com.zhou: debug

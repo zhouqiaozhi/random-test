@@ -13,11 +13,11 @@ public class StepStateListener implements StepExecutionListener {
 	}
 	
 	public void beforeStep(StepExecution stepExecution) {
-		log.info("Step start state {}", stepExecution.getStatus());
+		log.info("Step({}) start state {}", stepExecution.getStepName(), stepExecution.getStatus());
 	}
 	
 	public ExitStatus afterStep(StepExecution stepExecution) {
-		log.info("Step end state {}", stepExecution.getStatus());
+		log.info("Step({}) end state {}", stepExecution.getStepName(), stepExecution.getStatus());
 		return stepExecution.getExitStatus();
 	}
 }

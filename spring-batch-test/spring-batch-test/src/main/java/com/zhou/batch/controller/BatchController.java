@@ -1,18 +1,15 @@
 package com.zhou.batch.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +22,10 @@ import com.zhou.batch.service.BatchService;
 @RestController
 @RequestMapping("/batch")
 public class BatchController {
+	
+	@Value("${com.zhou.file.path}")
+	private String filepath;
+	
 	@Autowired
 	private BatchService batchService;
 	
@@ -61,6 +62,11 @@ public class BatchController {
 		batchService.start("paralel-count-job", params);
 		return true;
 	}
+	@PostMapping("/partition")
+	public Boolean partition(@RequestBody HashMap<String, Object> params) {
+		batchService.start("partition-job", params);
+		return true;
+	}
 	//test
 	@PostMapping("/generate/csv/{name}/{type}/{size}")
 	public Boolean generate(@PathVariable("name") String name, @PathVariable("type") Integer type, @PathVariable("size") Integer size) throws Exception {
@@ -76,11 +82,12 @@ public class BatchController {
 			default -> {}
 		}
 		
-		var csvOutputFile = new File(System.getProperty("user.dir") + "/src/main/resources/static/" + name + ".csv");
-		if(!csvOutputFile.exists()) {
-			csvOutputFile.createNewFile();
+		var f = new File(String.format("%s/%s.csv", filepath, name));
+		if(!f.exists()) {
+			f.getParentFile().mkdirs();
+			f.createNewFile();
 		}
-		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+		try (PrintWriter pw = new PrintWriter(f)) {
 			list.stream()
 	          .map(this::convertToCSV)
 	          .forEach(pw::println);
