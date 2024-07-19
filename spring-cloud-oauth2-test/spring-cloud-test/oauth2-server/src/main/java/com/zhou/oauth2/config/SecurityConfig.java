@@ -45,7 +45,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.zhou.oauth2.filter.AlreadyLoggedInfoFilter;
+import com.zhou.oauth2.filter.AlreadyLoggedInFilter;
 
 
 @Configuration
@@ -78,7 +78,7 @@ public class SecurityConfig {
 					.requestMatchers("/oauth2/**").permitAll()
 					.anyRequest().authenticated()
 			);
-		http.addFilterBefore(new AlreadyLoggedInfoFilter(), DisableEncodeUrlFilter.class);
+		http.addFilterBefore(new AlreadyLoggedInFilter(), DisableEncodeUrlFilter.class);
 		http.formLogin(login -> login.loginProcessingUrl("/oauth2/login").defaultSuccessUrl("http://api-gateway:8080/reload"));
 //		http.formLogin(formLogin -> formLogin
 //			.successHandler(customAuthenticationSuccessHandler)

@@ -13,7 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AlreadyLoggedInfoFilter extends OncePerRequestFilter {
+public class AlreadyLoggedInFilter extends OncePerRequestFilter {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
