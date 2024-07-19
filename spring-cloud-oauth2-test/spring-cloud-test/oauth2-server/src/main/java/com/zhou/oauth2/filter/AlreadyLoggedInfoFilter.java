@@ -13,7 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class TestFilter extends OncePerRequestFilter {
+public class AlreadyLoggedInfoFilter extends OncePerRequestFilter {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -26,9 +26,6 @@ public class TestFilter extends OncePerRequestFilter {
 				response.getWriter().write("{ \"result\": false, \"message\": \"User already logged in\"  }");
 				log.info("User already logged in");
 				return;
-			}
-			if(request.getSession(false) == null) {
-				request.getSession(true);
 			}
 		}
 		filterChain.doFilter(request, response);

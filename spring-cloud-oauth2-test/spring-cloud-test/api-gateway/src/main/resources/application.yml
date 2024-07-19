@@ -23,10 +23,6 @@ spring:
         uri: lb://oauth2-server
         predicates:
         - Path=/oauth2/**
-        filters:
-        - name: SetRequestHostHeader
-          args:
-            host: oauth2-server:9000
   security:
     oauth2:
       resourceserver:
