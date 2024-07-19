@@ -1,13 +1,9 @@
 package com.zhou.gateway.config;
 
-import java.net.URI;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -41,20 +37,6 @@ public class SecurityConfig {
 			)
 			.exceptionHandling((exceptionHandling) -> exceptionHandling
 				.authenticationEntryPoint((exchange, ex) -> {
-//					return Mono.just(exchange.getRequest().getURI().getRawPath())
-//					.map(it -> "/reload".equals(it))
-//					.doOnSuccess(res -> {
-//						if(res) {
-//							redirect.commence(exchange, ex);
-//						} else {
-//							exchange.getResponse().writeWith(Mono.just(new DefaultDataBufferFactory().wrap("You must do login before access resource".getBytes())));
-//						}
-//					});
-					
-//					if("/reload".equals(exchange.getRequest().getURI().getRawPath())) {
-//						
-//					}
-					
 					return Mono.just(exchange.getRequest().getURI().getRawPath())
 					.map(it -> "/reload".equals(it))
 					.map(res -> {
