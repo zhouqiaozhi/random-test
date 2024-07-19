@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: order-service
+  profiles:
+    active:
+    - local
+  cloud:
+    nacos:
+      server-addr: ${com.zhou.nacos.ip}:8848
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+      circuitbreaker:
+        enabled: true
+        alphanumeric-ids:
+          enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${com.zhou.oauth2.ip}:9000   
+server:
+  port: 8091
+  servlet:
+    context-path: /order
+logging:
+  level:
+    com.zhou: debug

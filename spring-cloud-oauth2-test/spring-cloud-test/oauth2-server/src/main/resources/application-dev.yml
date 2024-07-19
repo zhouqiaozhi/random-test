@@ -1,0 +1,6 @@
+com:
+  zhou:
+    nacos:
+      ip: nacos
+    mysql:
+      ip: mysql-cloud

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: user-service
+  profiles:
+    active:
+    - local
+  cloud:
+    nacos:
+      server-addr: ${com.zhou.nacos.ip}:8848
+  security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: http://${com.zhou.oauth2.ip}:9000
+server:
+  port: 8081
+  servlet:
+    context-path: /user
+logging:
+  level:
+    com.zhou: debug
+    org.hibernate: debug
+    org.springframework.security: debug

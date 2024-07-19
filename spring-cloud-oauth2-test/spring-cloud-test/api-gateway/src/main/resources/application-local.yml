@@ -1,0 +1,8 @@
+com:
+  zhou:
+    nacos:
+      ip: localhost
+    oauth2:
+      ip: oauth2-server
+    gateway:
+      ip: api-gateway

@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: gateway
+  profiles:
+    active:
+    - local
+  cloud:
+    nacos:
+      server-addr: ${com.zhou.nacos.ip}:8848
+    gateway:
+      default-filters:
+      - TokenRelay=
+      routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+      - id: order-service
+        uri: lb://order-service
+        predicates:
+        - Path=/order/**
+      - id: oauth2-server
+        uri: lb://oauth2-server
+        predicates:
+        - Method=POST
+        - Path=/oauth2/login,/oauth2/logout
+      - id: oauth2-server-get
+        uri: lb://oauth2-server
+        predicates:
+        - Path=/oauth2/**
+      
+        filters:
+        - name: SetRequestHostHeader
+          args:
+            host: oauth2-server:9000
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${com.zhou.oauth2.ip}:9000
+      client:
+        provider:
+          oauth2-server:
+            issuer-uri: http://${com.zhou.oauth2.ip}:9000
+            authorization-uri: ${spring.security.oauth2.client.provider.oauth2-server.issuer-uri}/oauth2/authorize
+            token-uri: ${spring.security.oauth2.client.provider.oauth2-server.issuer-uri}/oauth2/token
+        registration:
+          oidc-client:
+            provider: oauth2-server
+            client-name: gateway
+            client-id: gateway-id
+            client-secret: secret
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: authorization_code
+            redirect-uri: http://${com.zhou.gateway.ip}:8080/login/oauth2/code/oidc-client
+            scope:
+              - profile
+              - openid
+server:
+  port: 8080
+logging:
+  level:
+    com.zhou: debug
+    org.springframework.security: debug

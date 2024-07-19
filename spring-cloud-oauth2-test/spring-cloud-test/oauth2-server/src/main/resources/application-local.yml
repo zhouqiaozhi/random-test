@@ -1,0 +1,6 @@
+com:
+  zhou:
+    nacos:
+      ip: localhost
+    mysql:
+      ip: localhost

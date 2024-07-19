@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: oauth2-server
+  profiles:
+    active:
+    - local  
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${com.zhou.nacos.ip}:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${com.zhou.mysql.ip}:3306/oauth2db?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+server:
+  port: 9000
+logging:
+  level:
+    com.zhou: debug
+    org.hibernate: debug
+    org.springframework.security: debug
