@@ -22,13 +22,7 @@ spring:
       - id: oauth2-server
         uri: lb://oauth2-server
         predicates:
-        - Method=POST
-        - Path=/oauth2/login,/oauth2/logout
-      - id: oauth2-server-get
-        uri: lb://oauth2-server
-        predicates:
         - Path=/oauth2/**
-      
         filters:
         - name: SetRequestHostHeader
           args:
