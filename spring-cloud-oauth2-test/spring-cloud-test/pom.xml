@@ -59,7 +59,7 @@
     	<module>common</module>
 <!--     	<module>user-service</module>-->
 <!--    	<module>order-service</module>-->
-    	<module>api-gateway</module>
-    	<module>oauth2-server</module>
+<!--    	<module>api-gateway</module>-->
+<!--    	<module>oauth2-server</module>-->
     </modules>
 </project>
