@@ -1,0 +1,61 @@
+.popup {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);   
+}
+
+.popup .popup_container {
+    font-size: 20px;
+    min-height: 200px;
+    width: 240px;
+    padding: 24px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .popup_container .popup_text {
+    flex: 1;
+    font-size: 20px;
+}
+
+.popup .popup_container .button_container {
+    flex: 0 0 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    width: 100%;
+    padding: 0 5%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4f4f4f;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup .popup_container .button_container .button {
+    height: 48px;
+    width: 100%;
+    border-radius: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .popup_container .button_container .button.cancel {
+    box-sizing: border-box;
+    border: 4px #007782 solid;
+}
+
+.popup .popup_container .button_container .button.confirm {
+    box-sizing: border-box;
+    border: 1px #EDA900 solid;
+    background-color: #FFC627;
+}
