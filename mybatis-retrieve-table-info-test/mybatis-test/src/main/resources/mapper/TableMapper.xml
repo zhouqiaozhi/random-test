@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhou.mybatistest.mapper.TableMapper">
+    <resultMap id="TableResultMap" type="com.zhou.mybatistest.model.Column">
+        <result column="COLUMN_NAME" jdbcType="VARCHAR" property="name" />
+        <result column="IS_KEY" jdbcType="BOOLEAN" property="isKey" />
+        <result column="IS_NULLABLE" jdbcType="BOOLEAN" property="isNullable" />
+        <result column="DATA_TYPE" jdbcType="VARCHAR" property="type" />
+        <result column="MAX_SIZE" jdbcType="INTEGER" property="maxSize" />
+        <result column="NUMERIC_SCALE" jdbcType="INTEGER" property="digits" />
+    </resultMap>
+</mapper>
