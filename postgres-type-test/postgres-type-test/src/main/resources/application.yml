@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: postgres-type-test
+  profiles:
+    active:
+    - local
+  jpa:
+    show-sql: true
+logging:
+  level:
+    com.zhou: debug
+    org.hibernate: debug

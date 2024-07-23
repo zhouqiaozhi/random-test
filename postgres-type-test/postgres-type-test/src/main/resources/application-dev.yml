@@ -1,0 +1,7 @@
+com:
+  zhou:
+    datasource:
+      jdbcUrl: jdbc:postgresql://postgres:5432/testdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: root
