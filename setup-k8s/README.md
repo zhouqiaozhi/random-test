@@ -147,7 +147,7 @@ kubectl edit cm/kube-proxy -n kube-system
 
 /mode #set to ipvs
 
-kubectl delete kube-proxy-* -n kube-system
+kubectl delete po -n kube-system -l k8s-app=kube-proxy
 
 kubectl logs kube-proxy-* -n kube-system
 ```
