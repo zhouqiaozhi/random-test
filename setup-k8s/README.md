@@ -138,3 +138,16 @@ sudo kubeadm token create --print-join-command
 kubeadm join 192.168.50.130:6443 --token 2snctn.8gcx4tgun3bjhggu \
         --discovery-token-ca-cert-hash sha256:c0cb2be61a5776e587d43931935a6e71d96eb23f18b910342a90e54b5e6ab444
 ```
+##
+set to ipvs
+``` bash
+dnf install -y ipset ipvsadm
+
+kubectl edit cm/kube-proxy -n kube-system
+
+/mode #set to ipvs
+
+kubectl delete kube-proxy-* -n kube-system
+
+kubectl logs kube-proxy-* -n kube-system
+```
