@@ -15,7 +15,7 @@ export class AppBaseService implements AppService {
     return "angular-annotation-test";
   }
 
-  @Mock(AppMockService)
+  // @Mock(AppMockService)
   getVersion(): string {
     return '0.0.1';
   }
