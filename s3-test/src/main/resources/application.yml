@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: s3-test
+  profiles:
+    active:
+    - local
+aws:
+  accessKey: 
+  secretKey: 
+  s3:
+    bucketName: 
+    region:
+logging:
+  level:
+    com.zhou: debug
+server:
+  port: 31232
