@@ -1,0 +1,59 @@
+services:
+  es:
+    hostname: es
+    container_name: es
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx1g"
+      discovery.type: "single-node"
+      xpack.security.enabled: false
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    healthcheck:
+      test: [ "CMD", "curl" ,"http://localhost:9200/_cluster/health" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  kibana:
+    hostname: kibana
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    environment:
+      ELASTICSEARCH_HOSTS: "http://es:9200"
+    ports:
+    - "5601:5601"
+    volumes:
+    - "./kibana-config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro"
+    depends_on:
+      es:
+        condition: service_healthy
+  ls:
+    hostname: ls
+    container_name: ls
+    image: docker.elastic.co/logstash/logstash:8.14.3
+    ports:
+    - "5044:5044"
+    command: logstash -f /usr/share/logstash/config/logstash.conf
+    volumes:
+    - "./ls-config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro"
+    - "./ls-config/logstash.conf:/usr/share/logstash/config/logstash.conf:ro"
+    depends_on:
+      es:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl" ,"http://localhost:5600" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  fb:
+    hostname: fb
+    container_name: fb
+    image: docker.elastic.co/beats/filebeat:8.14.3
+    command: filebeat -e -strict.perms=false
+    volumes:
+    - "./fb-config/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+    - "./log:/var/log"
+    depends_on:
+      ls:
+        condition: service_healthy

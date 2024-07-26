@@ -1,0 +1,6 @@
+server.name: kibana
+server.host: "0.0.0.0"
+i18n.locale: zh-CN
+xpack.reporting.roles.enabled: false
+elasticsearch:
+  hosts: ${ELASTICSEARCH_HOSTS}
